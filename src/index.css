@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=300;400;500;600;700&family=Inter:wght=300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -15,7 +15,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 10%;
 
-    --primary: 175 80% 40%;
+    /* WARNA UTAMA: Diubah ke Ungu Pekat (Sama dengan teks section utama) */
+    --primary: 271 91% 25%; 
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 15% 92%;
@@ -24,7 +25,8 @@
     --muted: 220 15% 95%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 175 80% 45%;
+    /* ACCENT & RING: Diubah ke warna fuchsia/ungu agar senada */
+    --accent: 292 84% 45%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -32,25 +34,25 @@
 
     --border: 220 15% 88%;
     --input: 220 15% 88%;
-    --ring: 175 80% 40%;
+    --ring: 271 91% 25%;
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(175 80% 40%), hsl(200 80% 50%));
-    --gradient-hero: linear-gradient(180deg, hsl(86, 46%, 73%) 0%, hsl(210 25% 94%) 100%);
-    --shadow-glow: 0 0 40px hsl(175 80% 40% / 0.3);
-    --shadow-card: 0 4px 20px hsl(220 20% 10% / 0.08);
-    --shadow-card-hover: 0 8px 30px hsl(220 20% 10% / 0.12);
+    /* Custom tokens bertema gradasi ungu fuchsia pastel */
+    --gradient-primary: linear-gradient(135deg, hsl(271 91% 25%), hsl(292 84% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(271, 70%, 85%) 0%, hsl(292, 60%, 95%) 100%);
+    --shadow-glow: 0 0 40px hsl(271 91% 25% / 0.3);
+    --shadow-card: 0 4px 20px hsl(271 91% 25% / 0.08);
+    --shadow-card-hover: 0 8px 30px hsl(271 91% 25% / 0.12);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 271 91% 25%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 175 80% 40%;
+    --sidebar-ring: 271 91% 25%;
   }
 
   .dark {
@@ -63,7 +65,8 @@
     --popover: 220 25% 10%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 175 80% 50%;
+    /* Mode Gelap disesuaikan ke warna ungu/fuchsia menyala */
+    --primary: 292 84% 60%;
     --primary-foreground: 220 25% 6%;
 
     --secondary: 220 20% 18%;
@@ -72,7 +75,7 @@
     --muted: 220 20% 15%;
     --muted-foreground: 220 15% 60%;
 
-    --accent: 175 80% 50%;
+    --accent: 292 84% 60%;
     --accent-foreground: 220 25% 6%;
 
     --destructive: 0 70% 50%;
@@ -80,23 +83,23 @@
 
     --border: 220 20% 18%;
     --input: 220 20% 18%;
-    --ring: 175 80% 50%;
+    --ring: 292 84% 60%;
 
     /* Custom tokens dark */
-    --gradient-primary: linear-gradient(135deg, hsl(175 80% 50%), hsl(200 80% 60%));
-    --gradient-hero: linear-gradient(180deg, hsl(273, 87%, 42%) 0%, hsl(220 30% 10%) 100%);
-    --shadow-glow: 0 0 60px hsl(175 80% 50% / 0.4);
+    --gradient-primary: linear-gradient(135deg, hsl(292 84% 60%), hsl(271 91% 50%));
+    --gradient-hero: linear-gradient(180deg, hsl(271, 87%, 20%) 0%, hsl(220 30% 10%) 100%);
+    --shadow-glow: 0 0 60px hsl(292 84% 60% / 0.4);
     --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
-    --shadow-card-hover: 0 8px 30px hsl(175 80% 50% / 0.15);
+    --shadow-card-hover: 0 8px 30px hsl(292 84% 60% / 0.15);
 
     --sidebar-background: 220 25% 8%;
     --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 175 80% 50%;
+    --sidebar-primary: 292 84% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 20% 15%;
     --sidebar-accent-foreground: 210 20% 90%;
     --sidebar-border: 220 20% 18%;
-    --sidebar-ring: 175 80% 50%;
+    --sidebar-ring: 292 84% 60%;
   }
 }
 

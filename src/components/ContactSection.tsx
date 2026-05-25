@@ -8,6 +8,47 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
 
+// Komponen Hujan Es Krim Jatuh Estetik
+const IceCreamRain = () => {
+  const iceCreams = Array.from({ length: 15 }).map((_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    delay: Math.random() * 8,
+    duration: 6 + Math.random() * 6,
+    size: 20 + Math.random() * 20,
+    rotate: Math.random() * 360,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {iceCreams.map((ice) => (
+        <motion.div
+          key={ice.id}
+          initial={{ y: '-10%', x: 0, opacity: 0, rotate: ice.rotate }}
+          animate={{ 
+            y: '110vh', 
+            x: [0, Math.random() * 40 - 20, 0], 
+            opacity: [0, 0.7, 0.7, 0] 
+          }}
+          transition={{
+            duration: ice.duration,
+            repeat: Infinity,
+            delay: ice.delay,
+            ease: 'linear',
+          }}
+          style={{
+            position: 'absolute',
+            left: ice.left,
+            fontSize: `${ice.size}px`,
+          }}
+        >
+          🍦
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, 'Nama harus diisi').max(100, 'Nama terlalu panjang'),
   email: z.string().trim().email('Email tidak valid').max(255, 'Email terlalu panjang'),
@@ -20,13 +61,13 @@ const contactInfo = [
     icon: Mail,
     label: 'Email',
     value: 'meira.almeira1909@gmail.com',
-    href: 'mailto:hello@developer.com',
+    href: 'mailto:meira.almeira1909@gmail.com',
   },
   {
     icon: Phone,
     label: 'Telepon',
     value: '+62 85362634063',
-    href: 'tel:+6281234567890',
+    href: 'https://wa.me/6285362634063', // Diarahkan langsung ke WhatsApp
   },
   {
     icon: MapPin,
@@ -86,7 +127,8 @@ export default function ContactSection() {
       });
 
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error){console.log(error);
+    } catch (error) {
+      console.log(error);
       console.error('Error sending email:', error);
       toast({
         title: 'Gagal Mengirim',
@@ -99,8 +141,12 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 md:py-32 bg-gradient-to-b from-purple-300 via-fuchsia-100 to-purple-400 text-purple-950 relative overflow-hidden">
+      
+      {/* Efek Hujan Es Krim Jatuh */}
+      <IceCreamRain />
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,11 +154,11 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-medium mb-2 block">Kontak</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
+          <span className="text-purple-700 font-bold mb-2 block">Kontak</span>
+          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4 text-purple-950">
             Hubungi Saya
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <div className="w-20 h-1 bg-purple-600/40 mx-auto rounded-full" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -125,10 +171,10 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <h3 className="font-display text-2xl font-bold mb-4">
+              <h3 className="font-display text-2xl font-bold mb-4 text-purple-950">
                 Mari Berkolaborasi!
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-purple-900/90 font-medium leading-relaxed">
                 Punya project menarik atau ingin berkolaborasi? Jangan ragu untuk 
                 menghubungi saya. Saya selalu terbuka untuk diskusi tentang project 
                 baru, ide kreatif, atau kesempatan untuk menjadi bagian dari visi Anda.
@@ -140,18 +186,20 @@ export default function ContactSection() {
                 <motion.a
                   key={info.label}
                   href={info.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-4 glass rounded-xl hover:shadow-card-hover transition-all group"
+                  className="flex items-center gap-4 p-4 bg-white/40 backdrop-blur-md rounded-xl hover:bg-white/60 hover:shadow-xl border border-white/40 transition-all group"
                 >
-                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <info.icon className="h-5 w-5 text-primary" />
+                  <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-400/20 group-hover:bg-purple-600 group-hover:text-white transition-colors text-purple-700">
+                    <info.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">{info.label}</p>
-                    <p className="font-medium">{info.value}</p>
+                    <p className="text-sm text-purple-800 font-bold">{info.label}</p>
+                    <p className="font-semibold text-purple-950">{info.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -165,10 +213,10 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6 p-6 glass rounded-2xl shadow-card">
+            <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-white/40 backdrop-blur-md rounded-2xl border border-white/40 shadow-xl">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
+                  <label htmlFor="name" className="text-sm font-bold text-purple-950">
                     Nama
                   </label>
                   <Input
@@ -177,14 +225,14 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Nama Anda"
-                    className={errors.name ? 'border-destructive' : ''}
+                    className={`bg-white/60 border-purple-300 focus:border-purple-500 text-purple-950 placeholder:text-purple-400 ${errors.name ? 'border-destructive' : ''}`}
                   />
                   {errors.name && (
-                    <p className="text-xs text-destructive">{errors.name}</p>
+                    <p className="text-xs text-destructive font-semibold">{errors.name}</p>
                   )}
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
+                  <label htmlFor="email" className="text-sm font-bold text-purple-950">
                     Email
                   </label>
                   <Input
@@ -194,16 +242,16 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="email@example.com"
-                    className={errors.email ? 'border-destructive' : ''}
+                    className={`bg-white/60 border-purple-300 focus:border-purple-500 text-purple-950 placeholder:text-purple-400 ${errors.email ? 'border-destructive' : ''}`}
                   />
                   {errors.email && (
-                    <p className="text-xs text-destructive">{errors.email}</p>
+                    <p className="text-xs text-destructive font-semibold">{errors.email}</p>
                   )}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
+                <label htmlFor="subject" className="text-sm font-bold text-purple-950">
                   Subjek
                 </label>
                 <Input
@@ -212,15 +260,15 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Subjek pesan"
-                  className={errors.subject ? 'border-destructive' : ''}
+                  className={`bg-white/60 border-purple-300 focus:border-purple-500 text-purple-950 placeholder:text-purple-400 ${errors.subject ? 'border-destructive' : ''}`}
                 />
                 {errors.subject && (
-                  <p className="text-xs text-destructive">{errors.subject}</p>
+                  <p className="text-xs text-destructive font-semibold">{errors.subject}</p>
                 )}
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
+                <label htmlFor="message" className="text-sm font-bold text-purple-950">
                   Pesan
                 </label>
                 <Textarea
@@ -230,17 +278,17 @@ export default function ContactSection() {
                   onChange={handleChange}
                   placeholder="Tuliskan pesan Anda..."
                   rows={5}
-                  className={errors.message ? 'border-destructive' : ''}
+                  className={`bg-white/60 border-purple-300 focus:border-purple-500 text-purple-950 placeholder:text-purple-400 ${errors.message ? 'border-destructive' : ''}`}
                 />
                 {errors.message && (
-                  <p className="text-xs text-destructive">{errors.message}</p>
+                  <p className="text-xs text-destructive font-semibold">{errors.message}</p>
                 )}
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full rounded-full"
+                className="w-full rounded-full bg-purple-600 text-white hover:bg-purple-700 shadow-xl font-bold"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
